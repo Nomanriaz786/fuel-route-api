@@ -1,0 +1,101 @@
+{
+  "info": {
+    "name": "Fuel Route API",
+    "description": "Route, cheapest fuel stops (500-mile range) and total fuel cost (10 mpg) between two US locations.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8000" }
+  ],
+  "item": [
+    {
+      "name": "Chicago, IL to Dallas, TX",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/route?start=Chicago, IL&finish=Dallas, TX",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route"],
+          "query": [
+            { "key": "start", "value": "Chicago, IL" },
+            { "key": "finish", "value": "Dallas, TX" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Los Angeles, CA to New York, NY (coast to coast)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/route?start=Los Angeles, CA&finish=New York, NY",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route"],
+          "query": [
+            { "key": "start", "value": "Los Angeles, CA" },
+            { "key": "finish", "value": "New York, NY" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Coordinates input (Denver to Phoenix)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/route?start=39.7392,-104.9903&finish=33.4484,-112.0740",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route"],
+          "query": [
+            { "key": "start", "value": "39.7392,-104.9903" },
+            { "key": "finish", "value": "33.4484,-112.0740" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Map page (open in a browser)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/map?start=Chicago, IL&finish=Dallas, TX",
+          "host": ["{{baseUrl}}"],
+          "path": ["map"],
+          "query": [
+            { "key": "start", "value": "Chicago, IL" },
+            { "key": "finish", "value": "Dallas, TX" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Error: unknown location (400)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/route?start=Atlantis, ZZ&finish=Dallas, TX",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route"],
+          "query": [
+            { "key": "start", "value": "Atlantis, ZZ" },
+            { "key": "finish", "value": "Dallas, TX" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Error: missing finish (400)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/api/route?start=Chicago, IL",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "route"],
+          "query": [
+            { "key": "start", "value": "Chicago, IL" }
+          ]
+        }
+      }
+    }
+  ]
+}
